@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]> <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]> <html class="lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="en" xmlns="http://www.w3.org/1999/html"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Shopping Cart Checkout Widget</title>
+  <link rel="stylesheet" href="{% static 'cr/css/style.css' %}">
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+
+  <div class="cart">
+    <div class="cart-top">
+      <h2 class="cart-top-title" style="color:white">Checkout </h2>
+
+    </div>
+{% for i in ci %}
+    <ul>
+      <div class="image">
+
+         <a href="{{i.prodt.get_url}}"><img src="{{i.prodt.img.url}}" alt="{{i.prodt.name}}" style="height:70;width:70;/"></a>
+
+        <span class="description">ID: {{i.prodt.id}}</span><br>
+        <span>{{i.prodt.name}}</span><br>
+        <span>{{i.prodt.price}} x 1</span><br>
+        <span>price:{{i.total}}</span>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <br><a href="{% url 'cart_decrement' i.prodt.id %}"><i class="fa fa-minus" style="font-size:10px"></i></a>&nbsp;&nbsp;{{i.quan}}&nbsp;&nbsp;<a href="{% url 'addcart' i.prodt.id %}"><i class="fa fa-plus" style="font-size:10px"></i></a>
+        <br><span>Qty:{{i.quan}}</span>
+        <a href="{% url 'remove' i.prodt.id %}"><i class="fa fa-trash-o" style="font-size:20px"></i></a>
+      </div>
+
+    </ul>
+
+
+    <div class="cart-bottom">
+
+
+{% endfor %}
+<p>Total<span class="price" style="color:white"><b>&nbsp; Rs {{t}}</b></span></p>
+
+  </div>
+  </div>
+
+</body>
+</html>
+{% endblock %}
